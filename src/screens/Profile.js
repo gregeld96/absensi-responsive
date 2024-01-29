@@ -19,7 +19,6 @@ function ProfilePage() {
             setLoading(true);
             
             const res = await fetchUserProfile();
-            console.log(res);
 
             setData(res);
 
@@ -84,7 +83,10 @@ function ProfilePage() {
             </div>
 
             { openPassword && <ModifyPasswordModal open={openPassword} onClose={() => setOpenPassword(false)} onLoading={(e) => setLoading(e)} /> }
-            { openProfile && <ModifyProfileModal open={openProfile} onClose={() => setOpenProfile(false)} onLoading={(e) => setLoading(e)} /> }
+            { openProfile && <ModifyProfileModal open={openProfile} onClose={() => setOpenProfile(false)} onLoading={(e) => {
+                if(!e) getUserProfile();
+                setLoading(e)
+            }} /> }
             <LoadingModal open={loading} />
         </div>
     );

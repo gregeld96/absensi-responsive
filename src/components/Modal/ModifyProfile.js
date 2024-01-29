@@ -16,13 +16,17 @@ function ModifyProfileModal({ open, onClose, onLoading, }) {
 
             const payload = new FormData();
 
-            payload.append('profile-pic', profile);
+            let res = null;
 
-            const res = await uploadDocument(payload);
+            if(profile){
+              payload.append('profile-pic', profile);
+  
+              res = await uploadDocument(payload);
+            }
 
             await updateProfile({
                 phone: phoneNumber,
-                profile: res.path
+                profile: res?.path ? res?.path : null
             });
 
             toast('Berhasil merubah identitas diri');

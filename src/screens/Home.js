@@ -18,8 +18,6 @@ function HomePage() {
             const res = await getUserAttendanceToday({
                 type: type
             });
-            
-            console.log(res);
 
             if(res){
                 if(type === 'IN'){
